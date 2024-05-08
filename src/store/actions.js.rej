@@ -1,0 +1,46 @@
+diff a/vue/src/store/actions.js b/vue/src/store/actions.js	(rejected hunks)
+@@ -172,36 +172,44 @@
+                  this.removeElement( { element: element, parent: this.currentParent } );
+              }
+          }
+++<<<<<<< Updated upstream
+ +
+ +        function restoreInitialChildrenSettingsIfCanceled() {
+ +            if ( this.elementSettings.innerBlocks.length ) {
+ +                for ( let i = 0; i < this.elementSettings.innerBlocks.length; i++ ) {
+ +                    if ( this.elementSettings.innerBlocks[ i ].previousAttr ) {
+ +                        this.elementSettings.innerBlocks[ i ].attrs = JSON.parse( JSON.stringify( this.elementSettings.innerBlocks[ i ].previousAttr ) );
+ +                        this.elementSettings.innerBlocks[ i ].innerContent = this.elementSettings.innerBlocks[ i ].previousInnerContent;
+ +                        this.elementSettings.innerBlocks[ i ].innerHTML = this.elementSettings.innerBlocks[ i ].previousInnerHTML;
+ +
+ +                        delete this.elementSettings.innerBlocks[ i ].previousAttr;
+ +                        delete this.elementSettings.innerBlocks[ i ].previousInnerContent;
+ +                        delete this.elementSettings.innerBlocks[ i ].previousInnerHTML;
+ +                    }
+ +                }
+ +            }
+ +        }
+ +    },
+ +    saveElementSettings() {
+ +        if ( this.childGrandParent ) {
+ +            saveInitialChildrenSettings.bind( this )();
+ +
+++=======
++     },
++     saveElementSettings() {
++        if ( this.childGrandParent ) {
+++>>>>>>> Stashed changes
+              this.elementSettings.attrs = JSON.parse( JSON.stringify( this.currentElement.attrs ) );
+              this.elementSettings.innerContent = this.currentElement.innerContent;
+              this.elementSettings.innerHTML = this.currentElement.innerHTML;
+              this.showModal( {
+ -              element: this.currentParent,
+ -              parent: this.childGrandParent
+ +                element: this.currentParent,
+ +                parent: this.childGrandParent
+              } );
++ 
++ 		// We are saving regular element.
+          } else {
+              this.elementSettings.attrs = JSON.parse( JSON.stringify( this.currentElement.attrs ) );
+              this.elementSettings.innerContent = this.currentElement.innerContent;

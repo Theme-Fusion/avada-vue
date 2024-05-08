@@ -1,0 +1,20 @@
+{
+  "_vendor-159a1489.js": {
+    "file": "assets/vendor-159a1489.js"
+  },
+  "src/main.css": {
+    "file": "assets/main.css",
+    "src": "src/main.css"
+  },
+  "src/main.js": {
+    "css": [
+      "assets/main.css"
+    ],
+    "file": "assets/app.js",
+    "imports": [
+      "_vendor-159a1489.js"
+    ],
+    "isEntry": true,
+    "src": "src/main.js"
+  }
+}
