@@ -24,4 +24,5 @@ The app consists of a single simple data object in the store (text, padding, bac
 - Each should be passed the appropriate param from the store data.  
 - When the input value is changed it should update the store and therefore update the preview.
 - For the color options, please import and use an existing online color picker component for vue.  It can be any online color picker.
+- The file to edit is src/App.vue.
 
