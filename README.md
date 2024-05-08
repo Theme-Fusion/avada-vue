@@ -17,11 +17,11 @@ The app is very basic, with the same general tooling as we use in Avada. Primari
 - Pinia as the store https://pinia.vuejs.org/
 - Vite for the building https://vitejs.dev/
 
-The app consistent of a simple data object in the store (text, padding, background color, text color) and a `Preview` component which is fed that data from the store.  Under that are some dummy text fields which do nothing.
+The app consists of a single simple data object in the store (text, padding, background color, text color) and a `Preview` component which is fed that data from the store.  Under that are some dummy text fields which do nothing.
 
 ## The Task
 - The task is to make the fields functional.  
 - Each should be passed the appropriate param from the store data.  
 - When the input value is changed it should update the store and therefore update the preview.
-- For the color options, please import and use an existing online color picker component for vue.  I can be any online color picker.
+- For the color options, please import and use an existing online color picker component for vue.  It can be any online color picker.
 
