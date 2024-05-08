@@ -13,6 +13,7 @@ This repo is for a simple plugin which offers a starting point to vue developmen
 ## Description
 The app is very basic, with the same general tooling as we use in Avada. Primarily those are:
 - Vue3 https://vuejs.org/guide/introduction.html
+- Single file component approach https://vuejs.org/guide/scaling-up/sfc.html
 - Pinia as the store https://pinia.vuejs.org/
 - Vite for the building https://vitejs.dev/
 
