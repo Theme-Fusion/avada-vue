@@ -1,6 +1,6 @@
 {
-  "_vendor-95634487.js": {
-    "file": "assets/vendor-95634487.js"
+  "_vendor-60ff173a.js": {
+    "file": "assets/vendor-60ff173a.js"
   },
   "src/main.css": {
     "file": "assets/main.css",
@@ -12,7 +12,7 @@
     ],
     "file": "assets/app.js",
     "imports": [
-      "_vendor-95634487.js"
+      "_vendor-60ff173a.js"
     ],
     "isEntry": true,
     "src": "src/main.js"
