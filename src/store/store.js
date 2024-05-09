@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
-import actions from './actions';
-import getters from './getters';
+import { actions } from './actions';
+import { getters } from './getters';
 
 export const useStore = defineStore( 'AWB', {
   // arrow function recommended for full type inference
@@ -8,13 +8,13 @@ export const useStore = defineStore( 'AWB', {
     params: {
       title: 'Hello World',
       padding: {
-        top: '50px',
-        right: '50px',
-        bottom: '50px',
-        left: '50px',
+        paddingTop: '50px',
+        paddingRight: '50px',
+        paddingBottom: '50px',
+        paddingLeft: '50px',
       },
-      background: '#2271b1',
-      color: '#FFFFFF',
+      backgroundColor: '#2271b1',
+      textColor: '#FFFFFF',
     }
   } ),
   getters: getters,
