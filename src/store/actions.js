@@ -21,4 +21,3 @@ export const actions = {
         store.params.textColor = color;
     }
 };
-  
