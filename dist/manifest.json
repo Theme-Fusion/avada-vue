@@ -1,6 +1,6 @@
 {
-  "_vendor-c865e054.js": {
-    "file": "assets/vendor-c865e054.js"
+  "_vendor-fa94c25c.js": {
+    "file": "assets/vendor-fa94c25c.js"
   },
   "src/main.css": {
     "file": "assets/main.css",
@@ -12,7 +12,7 @@
     ],
     "file": "assets/app.js",
     "imports": [
-      "_vendor-c865e054.js"
+      "_vendor-fa94c25c.js"
     ],
     "isEntry": true,
     "src": "src/main.js"

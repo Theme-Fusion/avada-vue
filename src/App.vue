@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watch } from "vue";
+import { computed, ref, watch, onMounted, onBeforeUnmount } from "vue";
 import { useStore } from "./store/store";
 import Preview from "./components/Preview.vue";
 import { actions } from "./store/actions";
@@ -16,7 +16,9 @@ const paddingLeft = computed(() => getters.getPaddingLeft(store));
 const textColor = ref(getters.getTextColor(store)); // Use ref for reactive properties
 const textColorHex = computed(() => textColor.value.hex || textColor.value);
 const backgroundColor = ref(getters.getBackground(store)); // Use ref for reactive properties
-const backgroundColorHex = computed(() => backgroundColor.value.hex || backgroundColor.value);
+const backgroundColorHex = computed(
+  () => backgroundColor.value.hex || backgroundColor.value
+);
 const showTextColorPicker = ref(false);
 const showBackgroundColorPicker = ref(false);
 
@@ -55,7 +57,7 @@ watch(backgroundColor, (newColor) => {
 
 const updateBackgroundColor = (event) => {
   const BackgroundColorValue = event.hex || event.target.value;
-  actions.setBackground(store, BackgroundColorValue );
+  actions.setBackground(store, BackgroundColorValue);
 };
 
 const toggleTextColorPicker = () => {
@@ -67,6 +69,42 @@ const toggleBackgroundColorPicker = () => {
   showBackgroundColorPicker.value = !showBackgroundColorPicker.value;
   showTextColorPicker.value = false;
 };
+
+const closePickerOnClickOutside = (event) => {
+  const sketchElement = document.querySelector(".vc-sketch");
+  const clickedOutsideColorPicker =
+    !sketchElement || !sketchElement.contains(event.target);
+  const clickedOutsideTextColorInput = !document
+    .getElementById("textColorInput")
+    .contains(event.target);
+  const clickedOutsideBackgroundColorInput = !document
+    .getElementById("backgroundColorInput")
+    .contains(event.target);
+
+  if (
+    showTextColorPicker.value &&
+    clickedOutsideColorPicker &&
+    clickedOutsideTextColorInput
+  ) {
+    showTextColorPicker.value = false;
+  }
+
+  if (
+    showBackgroundColorPicker.value &&
+    clickedOutsideColorPicker &&
+    clickedOutsideBackgroundColorInput
+  ) {
+    showBackgroundColorPicker.value = false;
+  }
+};
+
+onMounted(() => {
+  document.addEventListener("click", closePickerOnClickOutside);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener("click", closePickerOnClickOutside);
+});
 </script>
 
 <template>
@@ -113,23 +151,33 @@ const toggleBackgroundColorPicker = () => {
       <div class="awb-vue__option">
         <label for="textColor">Color</label>
         <input
+          id="textColorInput"
           type="text"
           v-model="textColorHex"
           @click="toggleTextColorPicker"
           placeholder="Text Color"
         />
-         <Sketch v-if="showTextColorPicker" v-model="textColor" @input="updateTextColor" />
+        <Sketch
+          v-if="showTextColorPicker"
+          v-model="textColor"
+          @input="updateTextColor"
+        />
       </div>
 
       <div class="awb-vue__option">
         <label>Background</label>
         <input
+          id="backgroundColorInput"
           type="text"
           v-model="backgroundColorHex"
           @click="toggleBackgroundColorPicker"
           placeholder="Background Color"
         />
-         <Sketch v-if="showBackgroundColorPicker" v-model="backgroundColor" @input="updateBackgroundColor" />
+        <Sketch
+          v-if="showBackgroundColorPicker"
+          v-model="backgroundColor"
+          @input="updateBackgroundColor"
+        />
       </div>
     </div>
   </div>
