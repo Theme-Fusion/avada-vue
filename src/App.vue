@@ -14,7 +14,11 @@ const paddingRight = computed(() => getters.getPaddingRight(store));
 const paddingBottom = computed(() => getters.getPaddingBottom(store));
 const paddingLeft = computed(() => getters.getPaddingLeft(store));
 const textColor = ref(getters.getTextColor(store)); // Use ref for reactive properties
+const textColorHex = computed(() => textColor.value.hex || textColor.value);
 const backgroundColor = ref(getters.getBackground(store)); // Use ref for reactive properties
+const backgroundColorHex = computed(() => backgroundColor.value.hex || backgroundColor.value);
+const showTextColorPicker = ref(false);
+const showBackgroundColorPicker = ref(false);
 
 watch(textColor, (newColor) => {
   updateTextColor(newColor);
@@ -45,8 +49,23 @@ const updatePaddingLeft = (event) => {
   actions.setPaddingLeft(store, event.target.value);
 };
 
+watch(backgroundColor, (newColor) => {
+  updateBackgroundColor(newColor);
+});
+
 const updateBackgroundColor = (event) => {
-  actions.setBackground(store, event.target.value);
+  const BackgroundColorValue = event.hex || event.target.value;
+  actions.setBackground(store, BackgroundColorValue );
+};
+
+const toggleTextColorPicker = () => {
+  showTextColorPicker.value = !showTextColorPicker.value;
+  showBackgroundColorPicker.value = false;
+};
+
+const toggleBackgroundColorPicker = () => {
+  showBackgroundColorPicker.value = !showBackgroundColorPicker.value;
+  showTextColorPicker.value = false;
 };
 </script>
 
@@ -95,21 +114,22 @@ const updateBackgroundColor = (event) => {
         <label for="textColor">Color</label>
         <input
           type="text"
-          v-model="textColor"
-          @input="updateTextColor"
+          v-model="textColorHex"
+          @click="toggleTextColorPicker"
           placeholder="Text Color"
         />
-        <Sketch v-model="textColor" />
+         <Sketch v-if="showTextColorPicker" v-model="textColor" @input="updateTextColor" />
       </div>
 
       <div class="awb-vue__option">
         <label>Background</label>
         <input
           type="text"
-          v-model="backgroundColor"
-          @input="updateBackgroundColor"
+          v-model="backgroundColorHex"
+          @click="toggleBackgroundColorPicker"
           placeholder="Background Color"
         />
+         <Sketch v-if="showBackgroundColorPicker" v-model="backgroundColor" @input="updateBackgroundColor" />
       </div>
     </div>
   </div>
