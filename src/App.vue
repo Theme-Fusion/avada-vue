@@ -1,9 +1,10 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { useStore } from "./store/store";
 import Preview from "./components/Preview.vue";
 import { actions } from "./store/actions";
 import { getters } from "./store/getters";
+import { Sketch } from "@ckpack/vue-color";
 
 const store = useStore();
 
@@ -15,12 +16,17 @@ const paddingLeft = computed(() => getters.getPaddingLeft(store));
 const textColor = ref(getters.getTextColor(store)); // Use ref for reactive properties
 const backgroundColor = ref(getters.getBackground(store)); // Use ref for reactive properties
 
+watch(textColor, (newColor) => {
+  updateTextColor(newColor);
+});
+
 const updateTitle = (event) => {
   actions.setParamsTitle(store, event.target.value);
 };
 
 const updateTextColor = (event) => {
-  actions.setTextColor(store, event.target.value);
+  const colorValue = event.hex || event.target.value;
+  actions.setTextColor(store, colorValue);
 };
 
 const updatePaddingTop = (event) => {
@@ -86,14 +92,16 @@ const updateBackgroundColor = (event) => {
         />
       </div>
       <div class="awb-vue__option">
-        <label>Color</label>
+        <label for="textColor">Color</label>
         <input
           type="text"
           v-model="textColor"
           @input="updateTextColor"
           placeholder="Text Color"
         />
+        <Sketch v-model="textColor" />
       </div>
+
       <div class="awb-vue__option">
         <label>Background</label>
         <input
