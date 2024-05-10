@@ -1,6 +1,6 @@
 {
-  "_vendor-159a1489.js": {
-    "file": "assets/vendor-159a1489.js"
+  "_vendor-fa94c25c.js": {
+    "file": "assets/vendor-fa94c25c.js"
   },
   "src/main.css": {
     "file": "assets/main.css",
@@ -12,7 +12,7 @@
     ],
     "file": "assets/app.js",
     "imports": [
-      "_vendor-159a1489.js"
+      "_vendor-fa94c25c.js"
     ],
     "isEntry": true,
     "src": "src/main.js"
